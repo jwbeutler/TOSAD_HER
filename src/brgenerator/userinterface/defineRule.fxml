@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="496.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brgenerator.controllers.defineRuleController">
+   <children>
+      <Label layoutX="126.0" layoutY="100.0" text="Rule Name:" />
+      <TextField layoutX="236.0" layoutY="96.0" prefHeight="26.0" prefWidth="422.0" />
+      <Label layoutX="126.0" layoutY="148.0" text="Rule Type:" />
+      <Separator layoutX="122.0" layoutY="188.0" prefHeight="14.0" prefWidth="581.0" />
+      <Label layoutX="129.0" layoutY="214.0" text="Attribute:" />
+      <ChoiceBox layoutX="240.0" layoutY="210.0" prefHeight="26.0" prefWidth="419.0" />
+      <ChoiceBox layoutX="237.0" layoutY="143.0" prefHeight="26.0" prefWidth="419.0" />
+      <Label layoutX="132.0" layoutY="260.0" text="Operator" />
+      <ChoiceBox layoutX="242.0" layoutY="255.0" prefHeight="26.0" prefWidth="419.0" />
+      <Separator layoutX="136.0" layoutY="299.0" prefHeight="21.0" prefWidth="559.0" />
+      <Label layoutX="131.0" layoutY="323.0" text="Min. Value" />
+      <Label layoutX="132.0" layoutY="362.0" text="Max. Value" />
+      <TextField layoutX="241.0" layoutY="319.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextField layoutX="244.0" layoutY="358.0" prefHeight="26.0" prefWidth="199.0" />
+      <Button layoutX="376.0" layoutY="425.0" mnemonicParsing="false" text="Define New Rule" />
+      <Text layoutX="328.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Define New Rule">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
