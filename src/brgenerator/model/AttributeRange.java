@@ -6,7 +6,7 @@ public class AttributeRange extends BusinessRule{
     private int maxvalue;
 
     public AttributeRange(String name,String operator,int minvalue, int maxvalue){
-        super(name,"Attribute Range");
+        super(name,"AttributeRange");
         this.operator = operator;
         this.minvalue = minvalue;
         this.maxvalue = maxvalue;
