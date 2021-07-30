@@ -30,6 +30,26 @@ public class TargetDatabaseDAOImpl extends pgTargetDao implements TargetDatabase
     }
 
     @Override
+    public Table findTableByName(String name) {
+        Table table = null;
+
+        try(Connection connection = super.getConnection()){
+            Statement pstmt = connection.createStatement();
+            ResultSet resultSet = pstmt.executeQuery(
+                    "SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE' AND TABLE_NAME = '" + name + "';");
+
+            while (resultSet.next()){
+                table = new Table(resultSet.getString("table_name"));
+            }
+            resultSet.close();
+            pstmt.close();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return table;
+    }
+
+    @Override
     public List<Column> findColumnsByTable(String tablename) {
         List<Column> columns = new ArrayList<Column>();
 
@@ -49,6 +69,11 @@ public class TargetDatabaseDAOImpl extends pgTargetDao implements TargetDatabase
         }
         return columns;
 
+    }
+
+    @Override
+    public Column findColumnByName(String name) {
+        return null;
     }
 
 }

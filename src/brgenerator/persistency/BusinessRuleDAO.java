@@ -10,5 +10,6 @@ import java.util.List;
 public interface BusinessRuleDAO {
     public List<BusinessRule> findAll();
     public boolean create(BusinessRule businessRule,int columnid,int ruletypeid);
+    public List<String> getRuleTypes();
 
 }

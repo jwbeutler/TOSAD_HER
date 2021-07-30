@@ -5,10 +5,7 @@ import brgenerator.model.BusinessRule;
 import brgenerator.model.Column;
 import brgenerator.model.Table;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,5 +51,24 @@ public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
         return true;
 
 
+    }
+
+    @Override
+    public List<String> getRuleTypes() {
+        List<String> ruleTypes = new ArrayList<String>();
+
+        try(Connection connection = super.getConnection()){
+            Statement pstmt = connection.createStatement();
+            ResultSet resultSet = pstmt.executeQuery(
+                    "SELECT DISTINCT RULETYPE FROM BUSINESSRULETYPE;"
+            );
+            while (resultSet.next()){
+                String ruletype = resultSet.getString("ruletype");
+                ruleTypes.add(ruletype);
+            }
+        }catch (SQLException sqle){
+            sqle.printStackTrace();;
+        }
+        return ruleTypes;
     }
 }
