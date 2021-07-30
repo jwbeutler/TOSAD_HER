@@ -1,10 +1,6 @@
 package brgenerator.model;
 
 import brgenerator.persistency.*;
-import brgenerator.services.TestCreateService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
@@ -17,8 +13,11 @@ public class Main {
         ColumnDAO columnDAO = new ColumnDAOImpl();
         TestCreateService testCreateService = new TestCreateService();
 
+        //AttributeRange ar = new AttributeRange("Testmans", "OVer",1,10);
 
-        //testCreateService.createAR("test", "test");
+        }
+
+
 
 
     }

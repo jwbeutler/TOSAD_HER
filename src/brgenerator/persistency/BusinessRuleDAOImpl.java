@@ -14,7 +14,6 @@ import java.util.List;
 
 public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
 
-    @Override
     public List<BusinessRule> selectBusinessRule(String query) {
         List<BusinessRule> results = new ArrayList<BusinessRule>();
         try(Connection con = super.getConnection()){
