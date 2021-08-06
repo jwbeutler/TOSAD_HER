@@ -10,18 +10,20 @@ public class pgToolDao {
         private static final String DB_PASS = "6december";
         private static Connection conn;
 
-        public Connection getConnection() {
-            if(conn == null){
-                try {
-                    conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-                    return conn;
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            else{
+    public Connection getConnection() throws SQLException {
+        if(conn == null){
+            try {
+                conn = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
+                System.out.println("Opened database successfully");
                 return conn;
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            return null;
         }
+        else{
+            conn = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
+            return conn;
+        }
+        return null;
     }
+}
