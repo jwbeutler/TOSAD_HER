@@ -27,6 +27,7 @@ public class TargetDatabaseDAOImpl extends pgTargetDao implements TargetDatabase
             sqle.printStackTrace();
         }
         return results;
+
     }
 
     @Override
@@ -53,8 +54,8 @@ public class TargetDatabaseDAOImpl extends pgTargetDao implements TargetDatabase
     public List<Column> findColumnsByTable(String tablename) {
         List<Column> columns = new ArrayList<Column>();
 
-        try(Connection connection = super.getConnection()){
-            Statement pstmt = connection.createStatement();
+        try(Connection conn = super.getConnection()){
+            Statement pstmt = conn.createStatement();
             ResultSet resultset = pstmt.executeQuery(
                     "SELECT column_name, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME ='"+tablename+"';");
 

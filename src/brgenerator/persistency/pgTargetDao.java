@@ -14,7 +14,7 @@ public class pgTargetDao {
         public Connection getConnection() {
             if(conn == null){
                 try {
-                    conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+                    conn = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
                     return conn;
                 } catch (SQLException e) {
                     e.printStackTrace();

@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -20,6 +21,7 @@ public class defineRuleController implements Initializable {
     private TargetDBSerivce targetDBSerivce = ServiceProvider.getTargetDBService();
     private BusinessRuleService businessRuleService = ServiceProvider.getBusinessRuleService();
     public List<Table> tablesList = targetDBSerivce.findAll();
+
     public List<String> ruleTypesList = businessRuleService.getAllRuleTypes();
 
 
@@ -34,6 +36,8 @@ public class defineRuleController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<String> tablesListString = new ArrayList<>();
+
         for(Table t : tablesList){
             targetTables.getItems().add(t.getName());
             }
