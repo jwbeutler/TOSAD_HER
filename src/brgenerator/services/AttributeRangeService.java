@@ -4,6 +4,8 @@ import brgenerator.model.AttributeRange;
 import brgenerator.persistency.AttributeRangeDAO;
 import brgenerator.persistency.AttributeRangeDAOImpl;
 
+import java.util.List;
+
 public class AttributeRangeService {
     AttributeRangeDAO attributeRangeDAO = new AttributeRangeDAOImpl();
 
@@ -11,6 +13,9 @@ public class AttributeRangeService {
         AttributeRange newAr = new AttributeRange(name,operator,minVal,maxVal);
         attributeRangeDAO.create(newAr);
         return newAr;
+    }
+    public List<AttributeRange> findAll(){
+        return attributeRangeDAO.findAll();
     }
 
 }

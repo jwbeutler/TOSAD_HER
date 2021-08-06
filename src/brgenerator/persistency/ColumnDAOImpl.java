@@ -37,10 +37,10 @@ public class ColumnDAOImpl extends pgToolDao implements ColumnDAO {
                     "SELECT ID,NAME,TYPE FROM TARGETCOLUMN;"
             );
             while (resultSet.next()){
-                //int id = resultSet.getInt("id");
+                int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String type = resultSet.getString("type");
-                Column newColumn = new Column(name,type);
+                Column newColumn = new Column(id,name,type);
                 results.add(newColumn);
             }
         }catch (SQLException sqle){

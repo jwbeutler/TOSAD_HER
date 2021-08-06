@@ -2,10 +2,11 @@ package brgenerator.persistency;
 
 import brgenerator.model.AttributeRange;
 import brgenerator.model.BusinessRule;
+import brgenerator.model.Column;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AttributeRangeDAOImpl extends pgToolDao implements AttributeRangeDAO {
 
@@ -25,4 +26,27 @@ public class AttributeRangeDAOImpl extends pgToolDao implements AttributeRangeDA
         }
         return true;
     }
-}
+
+    @Override
+    public List<AttributeRange> findAll() {
+            List<AttributeRange> results = new ArrayList<AttributeRange>();
+            String rule = "AttributeRange";
+            try(Connection conn = super.getConnection()){
+                Statement pstmt = conn.createStatement();
+                ResultSet resultSet = pstmt.executeQuery(
+                        "SELECT ID,RULETYPE,OPERATOR,MINVAL,MAXVAL FROM BUSINESSRULETYPE WHERE RULETYPE = '"+rule+"';");
+                while (resultSet.next()){
+                    int id = resultSet.getInt("id");
+                    String ruletype = resultSet.getString("ruletype");
+                    String operator = resultSet.getString("operator");
+                    int minval = resultSet.getInt("minval");
+                    int maxval = resultSet.getInt("maxval");
+                    AttributeRange newAR = new AttributeRange(id,ruletype,operator,minval,maxval);
+                    results.add(newAR);
+                }
+            }catch (SQLException sqle){
+                sqle.printStackTrace();
+            }
+            return results;
+        }
+    }

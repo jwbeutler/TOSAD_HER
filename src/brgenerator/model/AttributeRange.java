@@ -4,9 +4,16 @@ public class AttributeRange extends BusinessRule{
     private String operator;
     private int minvalue;
     private int maxvalue;
+    private  int id;
 
     public AttributeRange(String name,String operator,int minvalue, int maxvalue){
         super(name,"AttributeRange");
+        this.operator = operator;
+        this.minvalue = minvalue;
+        this.maxvalue = maxvalue;
+    }
+    public AttributeRange(int id,String name,String operator,int minvalue, int maxvalue){
+        super(id,name,"AttributeRange");
         this.operator = operator;
         this.minvalue = minvalue;
         this.maxvalue = maxvalue;
@@ -41,5 +48,7 @@ public class AttributeRange extends BusinessRule{
     public void setMaxvalue(int maxvalue) {
         this.maxvalue = maxvalue;
     }
+
+
 
 }

@@ -31,9 +31,9 @@ public class TableDAOImpl extends pgToolDao implements TableDAO {
                     "SELECT ID,NAME FROM TARGETTABLE"
             );
             while (resultSet.next()){
-                //int id = resultSet.getInt("id");
+                int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                Table newTable = new Table(name);
+                Table newTable = new Table(id,name);
                 results.add(newTable);
             }
         }catch (SQLException sqle){
