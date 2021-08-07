@@ -7,6 +7,16 @@ public class BusinessRule {
     protected String name;
     private String operator;
     private String attribute;
+    private int tcid;
+    private int brtid;
+
+    public int getTcid() {
+        return tcid;
+    }
+
+    public int getBrtid() {
+        return brtid;
+    }
 
     public BusinessRule(String name) {
         id = ++numRules;
@@ -26,6 +36,12 @@ public class BusinessRule {
         this.id = id;
         this.name = name;
         this.type = type;
+    }
+    public BusinessRule(int id,String name, int tcid, int brtid) {
+        this.id = id;
+        this.name = name;
+        this.tcid = tcid;
+        this.brtid = brtid;
     }
     public BusinessRule(int id,String name, String type, String operator, String attribute){
         this.id = id;

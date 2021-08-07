@@ -13,5 +13,6 @@ public interface BusinessRuleDAO {
     public List<BusinessRule> findStartSchermRules();
     public boolean create(BusinessRule businessRule,int columnid,int ruletypeid);
     public List<String> getRuleTypes();
+    public BusinessRule findById(int id);
 
 }

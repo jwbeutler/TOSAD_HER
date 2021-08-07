@@ -58,6 +58,10 @@ public class BusinessRuleService {
         return businessRuleDAO.findStartSchermRules();
     }
 
+    public BusinessRule findById(int id){
+        return businessRuleDAO.findById(id);
+    }
+
 
 
 

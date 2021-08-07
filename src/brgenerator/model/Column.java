@@ -20,6 +20,17 @@ public class Column {
         this.type = type;
 
     }
+    public Column(int id,String name, String type,int tableid) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.tableid = tableid;
+
+    }
+
+    public int getTableid() {
+        return tableid;
+    }
 
     public static void setNumColumns(int numColumns) {
         Column.numColumns = numColumns;

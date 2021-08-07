@@ -119,4 +119,28 @@ public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
         }
         return ruleTypes;
     }
+
+    @Override
+    public BusinessRule findById(int id) {
+        BusinessRule businessRule = null;
+
+        try(Connection connection = super.getConnection()){
+            Statement pstmt = connection.createStatement();
+            ResultSet resultset = pstmt.executeQuery(
+                    "SELECT id, name, targetcolumn_id, businessruletype_id from businessrule where id = '"
+                            + id + "';");
+
+            while (resultset.next()) {
+                businessRule = new BusinessRule(resultset.getInt("id"),
+                        resultset.getString("name"),
+                        resultset.getInt("targetcolumn_id"),
+                        resultset.getInt("businessruletype_id"));
+            }
+            resultset.close();
+            pstmt.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return businessRule;
+    }
 }

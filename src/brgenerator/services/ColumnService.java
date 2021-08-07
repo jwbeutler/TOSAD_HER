@@ -26,5 +26,9 @@ public class ColumnService {
         return columnDAOImpl.findAll();
     }
 
+    public Column findById(int id){
+        return columnDAOImpl.findById(id);
+    }
+
 
 }

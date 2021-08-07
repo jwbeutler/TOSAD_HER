@@ -1,14 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="brgenerator.controllers.generateRuleController"
-            prefHeight="496.0" prefWidth="773.0">
-
+<AnchorPane prefHeight="496.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brgenerator.controllers.generateRuleController">
+   <children>
+      <Separator layoutX="348.0" layoutY="54.0" orientation="VERTICAL" prefHeight="351.0" prefWidth="5.0" />
+      <Text layoutX="312.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="293.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="278.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ruletype:">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="271.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Operator:">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="260.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min. Value:">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="256.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Target Table:">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="242.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Target Column:">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="259.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max. Value:">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="idLabel" layoutX="428.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="insertId">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="nameLabel" layoutX="428.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="insertName">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="ruleTypeLabel" layoutX="428.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="insertRuleType">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="operatorLabel" layoutX="428.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="insertOperator">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="minvalLabel" layoutX="428.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="insertMin">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="targetTableLabel" layoutX="428.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="insertTargetTable">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="targetColumnLabel" layoutX="428.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="insertTargetColumn">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="maxvalLabel" layoutX="428.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="insertMax">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Button fx:id="generateRule" layoutX="337.0" layoutY="435.0" mnemonicParsing="false" onAction="#generateRule" text="Generate Rule" />
+      <Separator layoutX="221.0" layoutY="155.0" prefHeight="9.0" prefWidth="327.0" />
+      <Separator layoutX="228.0" layoutY="288.0" prefHeight="9.0" prefWidth="327.0" />
+      <Text layoutX="330.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Businesss Rule" />
+   </children>
 </AnchorPane>

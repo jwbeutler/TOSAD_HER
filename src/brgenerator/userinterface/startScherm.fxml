@@ -18,6 +18,6 @@
       </TableView>
       <Text layoutX="324.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Business Rule Generator" />
       <Button fx:id="defineRuleButton" layoutX="270.0" layoutY="446.0" mnemonicParsing="false" onAction="#goToDefinePage" text="Define New Rule" />
-      <Button layoutX="428.0" layoutY="446.0" mnemonicParsing="false" text="Generate Rule" />
+      <Button fx:id="generateRule" layoutX="428.0" layoutY="446.0" mnemonicParsing="false" onAction="#generateRuleScreen" text="Generate Rule" />
    </children>
 </AnchorPane>

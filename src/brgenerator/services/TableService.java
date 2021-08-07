@@ -18,5 +18,9 @@ public class TableService {
         return tableDAO.findAll();
     }
 
+    public Table findById(int id){
+        return tableDAO.findById(id);
+    }
+
 
 }

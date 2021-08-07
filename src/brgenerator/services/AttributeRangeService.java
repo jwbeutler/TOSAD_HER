@@ -17,5 +17,8 @@ public class AttributeRangeService {
     public List<AttributeRange> findAll(){
         return attributeRangeDAO.findAll();
     }
+    public AttributeRange findById(int id){
+        return attributeRangeDAO.findById(id);
+    }
 
 }

@@ -55,13 +55,13 @@ public class ColumnDAOImpl extends pgToolDao implements ColumnDAO {
         try(Connection connection = super.getConnection()){
             Statement pstmt = connection.createStatement();
             ResultSet resultSet = pstmt.executeQuery(
-                    "SELECT ID,NAME,TYPE FROM TARGETCOLUMN WHERE ID ='"
+                    "SELECT ID,NAME,TYPE,table_id FROM TARGETCOLUMN WHERE ID ='"
                             + id + "';"
             );
             while (resultSet.next()){
                 column = new Column(
-//                        resultSet.getInt("id"),
-                        resultSet.getString("name"),resultSet.getString("type"));
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),resultSet.getString("type"),resultSet.getInt("table_id"));
             }
             resultSet.close();
             pstmt.close();
