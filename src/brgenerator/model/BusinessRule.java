@@ -5,6 +5,8 @@ public class BusinessRule {
     protected String type;
     private int id;
     protected String name;
+    private String operator;
+    private String attribute;
 
     public BusinessRule(String name) {
         id = ++numRules;
@@ -24,6 +26,13 @@ public class BusinessRule {
         this.id = id;
         this.name = name;
         this.type = type;
+    }
+    public BusinessRule(int id,String name, String type, String operator, String attribute){
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.operator = operator;
+        this.attribute = attribute;
     }
 
     public String getType() {
@@ -52,5 +61,13 @@ public class BusinessRule {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public String getAttribute() {
+        return attribute;
     }
 }

@@ -46,6 +46,11 @@ public class defineRuleController implements Initializable {
         String arString = "AttributeRange";
         ruleType.getItems().add(arString);
 
+        String opBetween = "Between";
+        String opNotBetween = "NotBetwen";
+        operator.getItems().add(opBetween);
+        operator.getItems().add(opNotBetween);
+
         targetTables.valueProperty().addListener(((observableValue, o, t1) -> {
             if(t1 == null){
                 targetTables.getItems().clear();
@@ -62,25 +67,24 @@ public class defineRuleController implements Initializable {
     }
 
     public void defineRule(ActionEvent actionEvent) {
+        //CREATING THE TABLE FOR TOOL DATABASE
         Table t = tableService.create(targetTables.getValue().toString());
         String targetColumnValue = targetColumns.getValue().toString();
-        //System.out.println(targetColumnValue);
         int tableid = t.getId();
-        //System.out.println(tableid);
-        //System.out.println(ruleType.getValue().toString());
+
+        //CREATING THE COLUMN CORRELATED TO THE CHOSEN TABLE
         Column c = columnService.createColumn(targetColumnValue,ruleType.getValue().toString(),tableid);
-        //System.out.println(c.getId());
+
+        //REATING NEW ATTRIBUTERANGE RULE
         String ruletext = ruleName.getText();
-        //String op = operator.getValue().toString();
+        String op = operator.getValue().toString();
         int mnval = Integer.parseInt(minValue.getText());
         int mxval = Integer.parseInt(maxValue.getText());
-        AttributeRange ar = attributeRangeService.createAR(ruletext,"between",mnval,mxval);
+        AttributeRange ar = attributeRangeService.createAR(ruletext,op,mnval,mxval);
+
+        //FINALIZE CREATING BUSINESS RULE
         int columnid = c.getId();
         int ruleid = ar.getId();
-        System.out.println(ruletext);
-        System.out.println(columnid);
-        System.out.println(ruleid);
         BusinessRule br = businessRuleService.createARBusinessRule(ruletext,columnid,ruleid);
-        System.out.println(br.getName());
     }
 }

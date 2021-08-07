@@ -1,4 +1,61 @@
 package brgenerator.controllers;
 
-public class startSchermController {
+import brgenerator.model.BusinessRule;
+import brgenerator.services.BusinessRuleService;
+import brgenerator.services.ServiceProvider;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class startSchermController implements Initializable {
+    public TableView ruleTable;
+    public TableColumn ruleNameColumn;
+    public TableColumn ruleTypeColumn;
+    public TableColumn attributeColumn;
+    public TableColumn operatorColumn;
+    public TableColumn generateButtonColumn;
+    public Button defineRuleButton;
+
+    public BusinessRuleService businessRuleService = ServiceProvider.getBusinessRuleService();
+
+
+
+    public void goToDefinePage(ActionEvent actionEvent) throws IOException {
+        Parent part = FXMLLoader.load(getClass().getResource("/brgenerator/userinterface/defineRule.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(part);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ruleNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ruleTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        attributeColumn.setCellValueFactory(new PropertyValueFactory<>("attribute"));
+        operatorColumn.setCellValueFactory(new PropertyValueFactory<>("operator"));
+        ruleTable.setItems(observableList);
+
+
+    }
+    ObservableList<BusinessRule> observableList = FXCollections.observableArrayList(
+            businessRuleService.findStartSchermRules());
+
 }

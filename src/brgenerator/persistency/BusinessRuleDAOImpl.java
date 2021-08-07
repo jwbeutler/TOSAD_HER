@@ -29,10 +29,58 @@ public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
     }
 
     @Override
+    public List<BusinessRule> findStartRuleById(int brtypeid, int tcid) {
+        List<BusinessRule> results = new ArrayList<BusinessRule>();
+        try(Connection conn = super.getConnection()){
+            Statement pstmt = conn.createStatement();
+            ResultSet resultSet = pstmt.executeQuery(
+                    "SELECT br.id,br.name,brt.ruletype,brt.operator,tc.name as attribute " +
+                            "FROM BUSINESSRULE br, BUSINESSRULETYPE brt, targetcolumn tc " +
+                            "where brt.id = '"+brtypeid+"' and tc.id = '"+tcid+"';");
+
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String type = resultSet.getString("type");
+                String operator = resultSet.getString("operator");
+                String attribute = resultSet.getString("attribute");
+                BusinessRule br = new BusinessRule(id,name,type,operator,attribute);
+                results.add(br);
+            }
+        }catch (SQLException sqle){
+            sqle.printStackTrace();
+        }
+        return results;
+    }
+
+    @Override
     public List<BusinessRule> findAll() {
         return selectBusinessRule(
                 "SELECT ID,NAME FROM BUSINESSRULE;"
         );
+    }
+
+    @Override
+    public List<BusinessRule> findStartSchermRules() {
+        List<BusinessRule> results = new ArrayList<BusinessRule>();
+        try(Connection conn = super.getConnection()){
+            Statement pstmt = conn.createStatement();
+            ResultSet resultSet = pstmt.executeQuery(
+                    "SELECT br.id,br.name,brt.ruletype,brt.operator,tc.name as attribute FROM BUSINESSRULE br, BUSINESSRULETYPE brt, targetcolumn tc;"
+            );
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String ruletype = resultSet.getString("ruletype");
+                String operator = resultSet.getString("operator");
+                String attribute = resultSet.getString("attribute");
+                BusinessRule br = new BusinessRule(id,name,ruletype,operator,attribute);
+                results.add(br);
+            }
+        }catch (SQLException sqle){
+            sqle.printStackTrace();
+        }
+        return results;
     }
 
     @Override
