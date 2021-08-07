@@ -38,10 +38,13 @@ public class startSchermController implements Initializable {
 
     public void goToDefinePage(ActionEvent actionEvent) throws IOException {
         Parent part = FXMLLoader.load(getClass().getResource("/brgenerator/userinterface/defineRule.fxml"));
+        Stage currentStage = (Stage) defineRuleButton.getScene().getWindow();
         Stage stage = new Stage();
         Scene scene = new Scene(part);
         stage.setScene(scene);
+        currentStage.close();
         stage.show();
+
 
     }
 
