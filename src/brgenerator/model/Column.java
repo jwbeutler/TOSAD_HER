@@ -1,7 +1,6 @@
 package brgenerator.model;
 
 public class Column {
-    private static int numColumns = 0;
     private int id;
     private String name;
     private String type;
@@ -9,7 +8,6 @@ public class Column {
 
 
     public Column(String name, String type) {
-        id = ++numColumns;
         this.name = name;
         this.type = type;
 
@@ -32,9 +30,6 @@ public class Column {
         return tableid;
     }
 
-    public static void setNumColumns(int numColumns) {
-        Column.numColumns = numColumns;
-    }
 
     public void setId(int id) {
         this.id = id;

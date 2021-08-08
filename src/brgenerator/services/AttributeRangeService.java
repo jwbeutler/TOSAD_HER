@@ -4,14 +4,17 @@ import brgenerator.model.AttributeRange;
 import brgenerator.persistency.AttributeRangeDAO;
 import brgenerator.persistency.AttributeRangeDAOImpl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class AttributeRangeService {
     AttributeRangeDAO attributeRangeDAO = new AttributeRangeDAOImpl();
 
-    public AttributeRange createAR(String name, String operator, int minVal, int maxVal){
+    public AttributeRange createAR(String name, String operator, int minVal, int maxVal) throws SQLException {
         AttributeRange newAr = new AttributeRange(name,operator,minVal,maxVal);
-        attributeRangeDAO.create(newAr);
+        int id = attributeRangeDAO.create(newAr);
+        //System.out.println(id);
+        newAr.setId(id);
         return newAr;
     }
     public List<AttributeRange> findAll(){

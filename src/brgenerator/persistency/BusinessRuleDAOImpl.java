@@ -66,7 +66,7 @@ public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
         try(Connection conn = super.getConnection()){
             Statement pstmt = conn.createStatement();
             ResultSet resultSet = pstmt.executeQuery(
-                    "SELECT br.id,br.name,brt.ruletype,brt.operator,tc.name as attribute FROM BUSINESSRULE br, BUSINESSRULETYPE brt, targetcolumn tc;"
+                    "SELECT DISTINCT ON(br.id) br.id,br.name,brt.ruletype,brt.operator,tc.name as attribute FROM BUSINESSRULE br, BUSINESSRULETYPE brt, targetcolumn tc;"
             );
             while (resultSet.next()){
                 int id = resultSet.getInt("id");
@@ -84,22 +84,47 @@ public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
     }
 
     @Override
-    public boolean create(BusinessRule businessRule,int columnid,int ruletypeid) {
-        try(Connection connection = super.getConnection()){
-            String query = "INSERT INTO BUSINESSRULE(ID,NAME,TARGETCOLUMN_ID,BUSINESSRULETYPE_ID)VALUES(?,?,?,?)";
-            PreparedStatement pstmt = connection.prepareStatement(query);
-            pstmt.setInt(1,businessRule.getId());
-            pstmt.setString(2,businessRule.getName());
-            pstmt.setInt(3,columnid);
-            pstmt.setInt(4,ruletypeid);
-            pstmt.executeUpdate();
+    public int create(BusinessRule businessRule,int columnid,int ruletypeid) throws SQLException {
+        int x = 0;
+        Connection conn = super.getConnection();
+        try{
+            BusinessRule br = businessRule;
+            br.toString();
+            String query = "INSERT INTO BUSINESSRULE(NAME,TARGETCOLUMN_ID,BUSINESSRULETYPE_ID)" + "VALUES( '"+br.getName()+"','"+columnid + "','" + ruletypeid + "') RETURNING id;";
+            //PreparedStatement pstmt = conn.prepareStatement(query);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                x += rs.getInt("id");
+            }
+            return x;
         }catch (SQLException throwables){
             throwables.printStackTrace();
         }
-        return true;
-
-
+        return x;
     }
+
+//    conn = super.getConnection();
+//    int x = 0;
+//    Connection conn = super.getConnection();
+//        try {
+//        AttributeRange atrng = rule;
+//        atrng.toString();
+//        String range = "insert into BUSINESSRULETYPE(ruletype,operator,minval,maxval)" +
+//                "Values( '" + atrng.getType() + "','" + atrng.getOperator() + "'," +atrng.getMinvalue() + "," + atrng.getMaxvalue() + ") RETURNING id;";
+//        Statement stmt = conn.createStatement();
+//        ResultSet rs = stmt.executeQuery(range);
+//        while (rs.next()) {
+//            x += rs.getInt("id");
+//        }
+//        return x;
+//    } catch (SQLException throwables) {
+//        throwables.printStackTrace();
+//    }
+//        return x;
+//}
+
+
 
     @Override
     public List<String> getRuleTypes() {

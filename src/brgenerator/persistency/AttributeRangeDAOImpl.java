@@ -9,22 +9,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AttributeRangeDAOImpl extends pgToolDao implements AttributeRangeDAO {
+    private Connection conn;
 
+
+    //    @Override
+//    public int create(AttributeRange attributeRange) {
+//        int x = 0;
+//        try (Connection connection = super.getConnection()) {
+//            String query = "INSERT INTO BUSINESSRULETYPE(ruletype,operator,minval,maxval)values(?,?,?,?)";
+//            PreparedStatement pstmt = connection.prepareStatement(query);
+//            //pstmt.setInt(1, attributeRange.getId());
+//            pstmt.setString(1, attributeRange.getType());
+//            pstmt.setString(2, attributeRange.getOperator());
+//            pstmt.setInt(3, attributeRange.getMinvalue());
+//            pstmt.setInt(4, attributeRange.getMaxvalue());
+//            ResultSet rs = pstmt.executeQuery(query);
+//            while(rs.next()){
+//                x += rs.getInt("id");
+//            }
+//            return x;
+//
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//        return x;
+//    }
     @Override
-    public boolean create(AttributeRange attributeRange) {
-        try (Connection connection = super.getConnection()) {
-            String query = "INSERT INTO BUSINESSRULETYPE(id,ruletype,operator,minval,maxval)values(?,?,?,?,?)";
-            PreparedStatement pstmt = connection.prepareStatement(query);
-            pstmt.setInt(1, attributeRange.getId());
-            pstmt.setString(2, attributeRange.getType());
-            pstmt.setString(3, attributeRange.getOperator());
-            pstmt.setInt(4, attributeRange.getMinvalue());
-            pstmt.setInt(5, attributeRange.getMaxvalue());
-            pstmt.executeUpdate();
+    public int create(AttributeRange rule) throws SQLException   {
+        conn = super.getConnection();
+        int x = 0;
+        Connection conn = super.getConnection();
+        try {
+            AttributeRange atrng = rule;
+            atrng.toString();
+            String range = "insert into BUSINESSRULETYPE(ruletype,operator,minval,maxval)" +
+                    "Values( '" + atrng.getType() + "','" + atrng.getOperator() + "'," +atrng.getMinvalue() + "," + atrng.getMaxvalue() + ") RETURNING id;";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(range);
+            while (rs.next()) {
+                x += rs.getInt("id");
+            }
+            return x;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return true;
+        return x;
     }
 
     @Override

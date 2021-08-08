@@ -72,18 +72,42 @@ public class ColumnDAOImpl extends pgToolDao implements ColumnDAO {
     }
 
     @Override
-    public boolean create(Column column, int tableid) {
-        try(Connection connection = super.getConnection()){
-            String query = "INSERT INTO TARGETCOLUMN(ID,NAME,TYPE,TABLE_ID)VALUES(?,?,?,?)";
-            PreparedStatement pstmt = connection.prepareStatement(query);
-            pstmt.setInt(1,column.getId());
-            pstmt.setString(2,column.getName());
-            pstmt.setString(3,column.getType());
-            pstmt.setInt(4,tableid);
-            pstmt.executeUpdate();
+    public int create(Column column, int tableid) throws SQLException {
+        int x = 0;
+        Connection conn = super.getConnection();
+        try{
+            Column clmn = column;
+            clmn.toString();
+            String query = "INSERT INTO TARGETCOLUMN(NAME,TYPE,TABLE_ID)"+"VALUES('"+clmn.getName()+"','"+clmn.getType()+"','"+tableid+"')RETURNING id;";
+            //pstmt.setInt(1,column.getId());
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                x += rs.getInt("id");
+            }
+            return x;
         }catch (SQLException throwables){
             throwables.printStackTrace();
         }
-        return true;
+        return x;
     }
+    //    conn = super.getConnection();
+//    int x = 0;
+//    Connection conn = super.getConnection();
+//        try {
+//        AttributeRange atrng = rule;
+//        atrng.toString();
+//        String range = "insert into BUSINESSRULETYPE(ruletype,operator,minval,maxval)" +
+//                "Values( '" + atrng.getType() + "','" + atrng.getOperator() + "'," +atrng.getMinvalue() + "," + atrng.getMaxvalue() + ") RETURNING id;";
+//        Statement stmt = conn.createStatement();
+//        ResultSet rs = stmt.executeQuery(range);
+//        while (rs.next()) {
+//            x += rs.getInt("id");
+//        }
+//        return x;
+//    } catch (SQLException throwables) {
+//        throwables.printStackTrace();
+//    }
+//        return x;
+//}
 }

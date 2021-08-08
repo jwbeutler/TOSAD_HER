@@ -1,7 +1,6 @@
 package brgenerator.model;
 
 public class BusinessRule {
-    private static int numRules = 0;
     protected String type;
     private int id;
     protected String name;
@@ -19,7 +18,6 @@ public class BusinessRule {
     }
 
     public BusinessRule(String name) {
-        id = ++numRules;
         this.name = name;
     }
 
@@ -28,7 +26,6 @@ public class BusinessRule {
 
 
     public BusinessRule(String name, String type) {
-        id = ++numRules;
         this.name = name;
         this.type = type;
     }
@@ -71,9 +68,6 @@ public class BusinessRule {
         return id;
     }
 
-    public static void setNumRules(int numRules) {
-        BusinessRule.numRules = numRules;
-    }
 
     public void setId(int id) {
         this.id = id;

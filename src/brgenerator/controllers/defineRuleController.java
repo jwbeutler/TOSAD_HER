@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -69,12 +70,12 @@ public class defineRuleController implements Initializable {
         }));
     }
 
-    public void defineRule(ActionEvent actionEvent) throws IOException {
+    public void defineRule(ActionEvent actionEvent) throws IOException, SQLException {
         //CREATING THE TABLE FOR TOOL DATABASE
         Table t = tableService.create(targetTables.getValue().toString());
         String targetColumnValue = targetColumns.getValue().toString();
         int tableid = t.getId();
-
+        //System.out.println(tableid);
         //CREATING THE COLUMN CORRELATED TO THE CHOSEN TABLE
         Column c = columnService.createColumn(targetColumnValue,ruleType.getValue().toString(),tableid);
 
@@ -88,6 +89,8 @@ public class defineRuleController implements Initializable {
         //FINALIZE CREATING BUSINESS RULE
         int columnid = c.getId();
         int ruleid = ar.getId();
+        //System.out.println(columnid);
+        //System.out.println(ruleid);
         BusinessRule br = businessRuleService.createARBusinessRule(ruletext,columnid,ruleid);
 
         Parent part = FXMLLoader.load(getClass().getResource("/brgenerator/userinterface/startScherm.fxml"));

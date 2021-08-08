@@ -9,19 +9,43 @@ import java.util.List;
 
 public class TableDAOImpl extends pgToolDao implements TableDAO {
     @Override
-    public boolean create(Table table) {
-        try (Connection connection = super.getConnection()) {
-            String query = "INSERT INTO TARGETTABLE(NAME)VALUES(?)";
-            PreparedStatement pstmt = connection.prepareStatement(query);
-            //pstmt.setInt(1, table.getId());
-            pstmt.setString(1, table.getName());
-            pstmt.executeUpdate();
+    public int create(Table table) throws SQLException {
+        int x= 0;
+        Connection conn = super.getConnection();
+        try {
+            Table tbl = table;
+            tbl.toString();
+            String query = "INSERT INTO TARGETTABLE(NAME)"+"VALUES('"+tbl.getName()+"') RETURNING id;";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                x+=rs.getInt("id");
+            }
+            return x;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return true;
-
+        return x;
     }
+    //    conn = super.getConnection();
+//    int x = 0;
+//    Connection conn = super.getConnection();
+//        try {
+//        AttributeRange atrng = rule;
+//        atrng.toString();
+//        String range = "insert into BUSINESSRULETYPE(ruletype,operator,minval,maxval)" +
+//                "Values( '" + atrng.getType() + "','" + atrng.getOperator() + "'," +atrng.getMinvalue() + "," + atrng.getMaxvalue() + ") RETURNING id;";
+//        Statement stmt = conn.createStatement();
+//        ResultSet rs = stmt.executeQuery(range);
+//        while (rs.next()) {
+//            x += rs.getInt("id");
+//        }
+//        return x;
+//    } catch (SQLException throwables) {
+//        throwables.printStackTrace();
+//    }
+//        return x;
+//}
 
     @Override
     public List<Table> findAll() {
