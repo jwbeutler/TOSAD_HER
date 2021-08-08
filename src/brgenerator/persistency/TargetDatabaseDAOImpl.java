@@ -71,6 +71,18 @@ public class TargetDatabaseDAOImpl extends pgTargetDao implements TargetDatabase
         return columns;
 
     }
+    public boolean executeRuleScript(String script) throws SQLException {
+        Connection conn = super.getConnection();
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(script);
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
 
     @Override
     public Column findColumnByName(String name) {

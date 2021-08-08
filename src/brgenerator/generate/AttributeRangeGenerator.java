@@ -3,25 +3,36 @@ package brgenerator.generate;
 import brgenerator.model.AttributeRange;
 import brgenerator.model.BusinessRule;
 
-public class AttributeRangeGenerator {
-//        private String plsqlTemplate =
-//                "            \"CREATE OR REPLACE FUNCTION %s_function() \"\n" +
-//                        "                    +   \"RETURNS TRIGGER AS \"\n" +
-//                        "                    + \"$BODY$ \"\n" +
-//                        "                    +   \"BEGIN \"\n" +
-//                        "                    +       \"IF (NEW.%s %s %s AND %s) THEN \"\n" +
-//                        "                    +           \"RAISE EXCEPTION '%s' \"\n" +
-//                        "                    +           \"USING ERRCODE = 22000; \"\n" +
-//                        "                    +       \"END IF; \"\n" +
-//                        "\n" +
-//                        "                    +       \"RETURN NEW; \"\n" +
-//                        "                    +   \"END \"\n" +
-//                        "                    + \"$BODY$ \"\n" +
-//                        "                    + \"LANGUAGE plpgsql SECURITY INVOKER; \";";
-//
-//        public String generate(BusinessRule br, AttributeRange ar){
-//            plsqlTemplate = String.format(plsqlTemplate,br.getName())
-//    }
+public class AttributeRangeGenerator extends Trigger {
 
+        private String template =
+                "CREATE OR REPLACE FUNCTION %s_function() "
+                        +   "RETURNS TRIGGER AS "
+                        + "$BODY$ "
+                        +   "BEGIN "
+                        +       "IF (NEW.%s %s %s AND %s) THEN "
+                        +           "RAISE EXCEPTION '%s' "
+                        +           "USING ERRCODE = 22000; "
+                        +       "END IF; "
 
-}
+                        +       "RETURN NEW; "
+                        +   "END "
+                        + "$BODY$ "
+                        + "LANGUAGE plpgsql SECURITY INVOKER; ";
+
+        public String generateRule (String brname,String columnname, String tablename, String operator, int minval, int maxval) {
+            String message = "";
+            template = String.format(template,
+                    brname,
+                    columnname,
+                    operator,
+                    minval,
+                    maxval,
+                    message);
+
+            String Trigger = generateGenericTrigger(brname,columnname,tablename,brname);
+            template += Trigger;
+
+            return template;
+        }
+    }

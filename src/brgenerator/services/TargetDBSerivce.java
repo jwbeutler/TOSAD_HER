@@ -5,6 +5,7 @@ import brgenerator.model.Table;
 import brgenerator.persistency.TargetDatabaseDAO;
 import brgenerator.persistency.TargetDatabaseDAOImpl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class TargetDBSerivce {
@@ -18,5 +19,8 @@ public class TargetDBSerivce {
     }
     public Table findTableByName(String tableName){
         return targetDatabaseDAO.findTableByName(tableName);
+    }
+    public boolean executeRule(String script) throws SQLException {
+        return targetDatabaseDAO.executeRuleScript(script);
     }
 }

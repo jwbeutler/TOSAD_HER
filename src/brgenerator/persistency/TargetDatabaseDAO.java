@@ -3,6 +3,7 @@ package brgenerator.persistency;
 import brgenerator.model.Column;
 import brgenerator.model.Table;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface TargetDatabaseDAO {
@@ -10,4 +11,5 @@ public interface TargetDatabaseDAO {
     public Table findTableByName(String name);
     public List<Column> findColumnsByTable(String tablename);
     public Column findColumnByName(String name);
+    public boolean executeRuleScript(String script) throws SQLException;
 }
