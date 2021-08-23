@@ -8,6 +8,7 @@ public class ServiceProvider {
     private static AttributeRangeService attributeRangeService = new AttributeRangeService();
     private static TableService tableService = new TableService();
     private static ColumnService columnService = new ColumnService();
+    private static AttributeCompareService attributeCompareService = new AttributeCompareService();
 
     public static TargetDBSerivce getTargetDBService(){
         return targetDBService;
@@ -24,5 +25,6 @@ public class ServiceProvider {
     public static ColumnService getColumnService(){
         return columnService;
     }
+    public static AttributeCompareService getAttributeCompareService(){return attributeCompareService;}
 
 }

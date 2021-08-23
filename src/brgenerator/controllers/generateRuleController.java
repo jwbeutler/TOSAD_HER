@@ -27,6 +27,7 @@ public class generateRuleController implements Initializable {
     public Text targetColumnLabel;
     public Text maxvalLabel;
     public Button generateRule;
+    public Text litvalLabel;
 
 
     public void generateRule(ActionEvent actionEvent) throws SQLException {
@@ -35,7 +36,6 @@ public class generateRuleController implements Initializable {
         AttributeRangeService attributeRangeService = ServiceProvider.getAttributeRangeService();
         ColumnService columnService = ServiceProvider.getColumnService();
         TargetDBSerivce targetDBSerivce = ServiceProvider.getTargetDBService();
-
 
         // Step 1
         Node node = (Node) actionEvent.getSource();

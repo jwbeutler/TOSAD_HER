@@ -93,5 +93,15 @@
       <Separator layoutX="221.0" layoutY="155.0" prefHeight="9.0" prefWidth="327.0" />
       <Separator layoutX="228.0" layoutY="288.0" prefHeight="9.0" prefWidth="327.0" />
       <Text layoutX="330.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Businesss Rule" />
+      <Text layoutX="260.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lit. Value:">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="litvalLabel" layoutX="431.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="insertLit">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

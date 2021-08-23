@@ -32,5 +32,7 @@
       <Label layoutX="442.0" layoutY="100.0" text="Column" />
       <ComboBox fx:id="operator" layoutX="231.0" layoutY="292.0" prefHeight="26.0" prefWidth="422.0" />
       <ComboBox fx:id="ruleType" layoutX="231.0" layoutY="219.0" prefHeight="26.0" prefWidth="422.0" />
+      <TextField fx:id="litValue" layoutX="238.0" layoutY="430.0" prefHeight="26.0" prefWidth="199.0" />
+      <Label layoutX="128.0" layoutY="435.0" text="Lit. Value" />
    </children>
 </AnchorPane>

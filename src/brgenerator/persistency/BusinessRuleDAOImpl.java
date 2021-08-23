@@ -66,7 +66,8 @@ public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
         try(Connection conn = super.getConnection()){
             Statement pstmt = conn.createStatement();
             ResultSet resultSet = pstmt.executeQuery(
-                    "SELECT DISTINCT ON(br.id) br.id,br.name,brt.ruletype,brt.operator,tc.name as attribute FROM BUSINESSRULE br, BUSINESSRULETYPE brt, targetcolumn tc;"
+                    "SELECT DISTINCT ON(br.id) br.id,br.name,brt.ruletype,brt.operator,tc.name as attribute FROM BUSINESSRULE br, BUSINESSRULETYPE brt, targetcolumn tc\n" +
+                            "WHERE br.businessruletype_id = brt.id AND br.targetcolumn_id = tc.id;"
             );
             while (resultSet.next()){
                 int id = resultSet.getInt("id");
@@ -103,27 +104,6 @@ public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
         }
         return x;
     }
-
-//    conn = super.getConnection();
-//    int x = 0;
-//    Connection conn = super.getConnection();
-//        try {
-//        AttributeRange atrng = rule;
-//        atrng.toString();
-//        String range = "insert into BUSINESSRULETYPE(ruletype,operator,minval,maxval)" +
-//                "Values( '" + atrng.getType() + "','" + atrng.getOperator() + "'," +atrng.getMinvalue() + "," + atrng.getMaxvalue() + ") RETURNING id;";
-//        Statement stmt = conn.createStatement();
-//        ResultSet rs = stmt.executeQuery(range);
-//        while (rs.next()) {
-//            x += rs.getInt("id");
-//        }
-//        return x;
-//    } catch (SQLException throwables) {
-//        throwables.printStackTrace();
-//    }
-//        return x;
-//}
-
 
 
     @Override

@@ -46,7 +46,6 @@ public class startSchermController implements Initializable {
         currentStage.close();
         stage.show();
 
-
     }
 
     @Override
