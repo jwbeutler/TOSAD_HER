@@ -1,10 +1,8 @@
 package brgenerator.controllers;
 
+import brgenerator.generate.AttributeCompareGenerator;
 import brgenerator.generate.AttributeRangeGenerator;
-import brgenerator.model.AttributeRange;
-import brgenerator.model.BusinessRule;
-import brgenerator.model.Column;
-import brgenerator.model.Table;
+import brgenerator.model.*;
 import brgenerator.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -34,6 +32,7 @@ public class generateRuleController implements Initializable {
         BusinessRuleService businessRuleService = ServiceProvider.getBusinessRuleService();
         TableService tableService = ServiceProvider.getTableService();
         AttributeRangeService attributeRangeService = ServiceProvider.getAttributeRangeService();
+        AttributeCompareService attributeCompareService = ServiceProvider.getAttributeCompareService();
         ColumnService columnService = ServiceProvider.getColumnService();
         TargetDBSerivce targetDBSerivce = ServiceProvider.getTargetDBService();
 
@@ -45,30 +44,44 @@ public class generateRuleController implements Initializable {
         // Step 3
 
         BusinessRule businessRule = businessRuleService.findById(br.getId());
-        AttributeRange ar = attributeRangeService.findById(businessRule.getBrtid());
+
+        //Invullen Standaard Table en Column waarden
         Column c = columnService.findById(businessRule.getTcid());
         Table t = tableService.findById(c.getTableid());
-
         idLabel.setText(String.valueOf(br.getId()));
         ruleTypeLabel.setText(br.getType());
         operatorLabel.setText(br.getOperator());
         nameLabel.setText(br.getName());
-
-        minvalLabel.setText(String.valueOf(ar.getMinvalue()));
-        maxvalLabel.setText(String.valueOf(ar.getMaxvalue()));
-
         targetColumnLabel.setText(c.getName());
         targetTableLabel.setText(t.getName());
 
-        AttributeRangeGenerator atrg = new AttributeRangeGenerator();
+
+        //Specifiek voor AttributeRange
+//        AttributeRange ar = attributeRangeService.findById(businessRule.getBrtid());
+//        minvalLabel.setText(String.valueOf(ar.getMinvalue()));
+//        maxvalLabel.setText(String.valueOf(ar.getMaxvalue()));
+//        AttributeRangeGenerator atrg = new AttributeRangeGenerator();
+//        String name = nameLabel.getText();
+//        String tc = targetColumnLabel.getText();
+//        String tt = targetTableLabel.getText();
+//        String operator = operatorLabel.getText();
+//        int minVal = Integer.parseInt(minvalLabel.getText());
+//        int maxVal = Integer.parseInt(maxvalLabel.getText());
+//        String script = atrg.generateRule(name,tc,tt,operator,minVal,maxVal);
+
+        //Specifiek voor AttributeCompare
+        AttributeCompare ac = attributeCompareService.findById(businessRule.getBrtid());
+        litvalLabel.setText(String.valueOf(ac.getLitvalue()));
+        AttributeCompareGenerator acg = new AttributeCompareGenerator();
         String name = nameLabel.getText();
         String tc = targetColumnLabel.getText();
         String tt = targetTableLabel.getText();
         String operator = operatorLabel.getText();
-        int minVal = Integer.parseInt(minvalLabel.getText());
-        int maxVal = Integer.parseInt(maxvalLabel.getText());
+        int litVal = Integer.parseInt(litvalLabel.getText());
+        String script = acg.generateRule(name,tc,tt,operator,litVal);
+        System.out.println(script);
 
-        String script = atrg.generateRule(name,tc,tt,operator,minVal,maxVal);
+        //Uitvoeren script
         targetDBSerivce.executeRule(script);
 
     }
@@ -84,6 +97,7 @@ public class generateRuleController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
 
     }
