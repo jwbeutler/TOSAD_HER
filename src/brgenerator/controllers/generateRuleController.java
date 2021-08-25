@@ -27,25 +27,16 @@ public class generateRuleController implements Initializable {
     public Button generateRule;
     public Text litvalLabel;
 
-
-    public void generateRule(ActionEvent actionEvent) throws SQLException {
+    public void fillData(ActionEvent actionEvent){
         BusinessRuleService businessRuleService = ServiceProvider.getBusinessRuleService();
         TableService tableService = ServiceProvider.getTableService();
-        AttributeRangeService attributeRangeService = ServiceProvider.getAttributeRangeService();
-        AttributeCompareService attributeCompareService = ServiceProvider.getAttributeCompareService();
         ColumnService columnService = ServiceProvider.getColumnService();
-        TargetDBSerivce targetDBSerivce = ServiceProvider.getTargetDBService();
 
-        // Step 1
         Node node = (Node) actionEvent.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-        // Step 2
         BusinessRule br = (BusinessRule) stage.getUserData();
-        // Step 3
-
         BusinessRule businessRule = businessRuleService.findById(br.getId());
 
-        //Invullen Standaard Table en Column waarden
         Column c = columnService.findById(businessRule.getTcid());
         Table t = tableService.findById(c.getTableid());
         idLabel.setText(String.valueOf(br.getId()));
@@ -55,22 +46,17 @@ public class generateRuleController implements Initializable {
         targetColumnLabel.setText(c.getName());
         targetTableLabel.setText(t.getName());
 
+    }
 
-        //Specifiek voor AttributeRange
-//        AttributeRange ar = attributeRangeService.findById(businessRule.getBrtid());
-//        minvalLabel.setText(String.valueOf(ar.getMinvalue()));
-//        maxvalLabel.setText(String.valueOf(ar.getMaxvalue()));
-//        AttributeRangeGenerator atrg = new AttributeRangeGenerator();
-//        String name = nameLabel.getText();
-//        String tc = targetColumnLabel.getText();
-//        String tt = targetTableLabel.getText();
-//        String operator = operatorLabel.getText();
-//        int minVal = Integer.parseInt(minvalLabel.getText());
-//        int maxVal = Integer.parseInt(maxvalLabel.getText());
-//        String script = atrg.generateRule(name,tc,tt,operator,minVal,maxVal);
+    public void generateACRule() throws SQLException {
+        BusinessRuleService businessRuleService = ServiceProvider.getBusinessRuleService();
+        AttributeCompareService attributeCompareService = ServiceProvider.getAttributeCompareService();
+        TargetDBSerivce targetDBSerivce = ServiceProvider.getTargetDBService();
 
-        //Specifiek voor AttributeCompare
-        AttributeCompare ac = attributeCompareService.findById(businessRule.getBrtid());
+        int ruleid = Integer.parseInt(idLabel.getText());
+        BusinessRule br = businessRuleService.findById(ruleid);
+
+        AttributeCompare ac = attributeCompareService.findById(br.getBrtid());
         litvalLabel.setText(String.valueOf(ac.getLitvalue()));
         AttributeCompareGenerator acg = new AttributeCompareGenerator();
         String name = nameLabel.getText();
@@ -79,20 +65,44 @@ public class generateRuleController implements Initializable {
         String operator = operatorLabel.getText();
         int litVal = Integer.parseInt(litvalLabel.getText());
         String script = acg.generateRule(name,tc,tt,operator,litVal);
-        System.out.println(script);
-
-        //Uitvoeren script
         targetDBSerivce.executeRule(script);
 
     }
-    public void GenerateRule(String name, String tc, String tt, String operator, int minVal, int maxVal){
-        //Ophalen PSQL template via toString methode in PSQL class
-        //Dan kwestie van variabelen erin gooien
-        //Dan de TargetDatabaseDao oproepen en uitvoeren die hap
+    public void generateARRule() throws SQLException{
+        AttributeRangeService attributeRangeService = ServiceProvider.getAttributeRangeService();
+        BusinessRuleService businessRuleService = ServiceProvider.getBusinessRuleService();
+        TargetDBSerivce targetDBSerivce = ServiceProvider.getTargetDBService();
+
+        int ruleid = Integer.parseInt(idLabel.getText());
+        BusinessRule br = businessRuleService.findById(ruleid);
+
+        AttributeRange ar = attributeRangeService.findById(br.getBrtid());
+        minvalLabel.setText(String.valueOf(ar.getMinvalue()));
+        maxvalLabel.setText(String.valueOf(ar.getMaxvalue()));
+        AttributeRangeGenerator atrg = new AttributeRangeGenerator();
+        String name = nameLabel.getText();
+        String tc = targetColumnLabel.getText();
+        String tt = targetTableLabel.getText();
+        String operator = operatorLabel.getText();
+        int minVal = Integer.parseInt(minvalLabel.getText());
+        int maxVal = Integer.parseInt(maxvalLabel.getText());
+
+        String script = atrg.generateRule(name,tc,tt,operator,minVal,maxVal);
+        targetDBSerivce.executeRule(script);
+
+    }
 
 
 
+    public void generateRule(ActionEvent actionEvent) throws SQLException {
+        if(ruleTypeLabel.getText().equals("AttributeRange")){
+            generateARRule();
+            System.out.println("Attribute Range aangemaakt!");
+        }else if(ruleTypeLabel.getText().equals("AttributeCompare")){
+            generateACRule();
+            System.out.println("Attribute Compare aangemaakt!");
 
+        }
     }
 
     @Override

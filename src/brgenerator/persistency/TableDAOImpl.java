@@ -27,25 +27,7 @@ public class TableDAOImpl extends pgToolDao implements TableDAO {
         }
         return x;
     }
-    //    conn = super.getConnection();
-//    int x = 0;
-//    Connection conn = super.getConnection();
-//        try {
-//        AttributeRange atrng = rule;
-//        atrng.toString();
-//        String range = "insert into BUSINESSRULETYPE(ruletype,operator,minval,maxval)" +
-//                "Values( '" + atrng.getType() + "','" + atrng.getOperator() + "'," +atrng.getMinvalue() + "," + atrng.getMaxvalue() + ") RETURNING id;";
-//        Statement stmt = conn.createStatement();
-//        ResultSet rs = stmt.executeQuery(range);
-//        while (rs.next()) {
-//            x += rs.getInt("id");
-//        }
-//        return x;
-//    } catch (SQLException throwables) {
-//        throwables.printStackTrace();
-//    }
-//        return x;
-//}
+
 
     @Override
     public List<Table> findAll() {

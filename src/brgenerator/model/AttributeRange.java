@@ -19,12 +19,7 @@ public class AttributeRange extends BusinessRule{
         this.minvalue = minvalue;
         this.maxvalue = maxvalue;
     }
-//    public AttributeRange(String name,String operator,int minvalue,int maxvalue){
-//        this.name = name;
-//        this.operator = operator;
-//        this.minvalue = minvalue;
-//        this.maxvalue = maxvalue;
-//    }
+
     public String getType(){
         return super.type;
     }

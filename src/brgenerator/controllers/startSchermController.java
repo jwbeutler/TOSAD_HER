@@ -37,6 +37,7 @@ public class startSchermController implements Initializable {
     public Button generateRule;
 
 
+    //Define Link
     public void goToDefinePage(ActionEvent actionEvent) throws IOException {
         Parent part = FXMLLoader.load(getClass().getResource("/brgenerator/userinterface/defineRule.fxml"));
         Stage currentStage = (Stage) defineRuleButton.getScene().getWindow();
@@ -45,9 +46,9 @@ public class startSchermController implements Initializable {
         stage.setScene(scene);
         currentStage.close();
         stage.show();
-
     }
 
+    //Invullen Table
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ruleNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -61,6 +62,7 @@ public class startSchermController implements Initializable {
     ObservableList<BusinessRule> observableList = FXCollections.observableArrayList(
             businessRuleService.findStartSchermRules());
 
+    //Naar Generate
     public void generateRuleScreen(ActionEvent actionEvent) throws IOException {
         BusinessRule br = ruleTable.getSelectionModel().getSelectedItem();
         Node node = (Node) actionEvent.getSource();
@@ -77,11 +79,4 @@ public class startSchermController implements Initializable {
         }
     }
 
-//        Parent part = FXMLLoader.load(getClass().getResource("/brgenerator/userinterface/generateRule.fxml"));
-//        Stage currentStage = (Stage) generateRule.getScene().getWindow();
-//        Stage stage = new Stage();
-//        Scene scene = new Scene(part);
-//        stage.setScene(scene);
-//        currentStage.close();
-//        stage.show();
-    }
+}

@@ -7,26 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ColumnDAOImpl extends pgToolDao implements ColumnDAO {
-    @Override
-    public List<Column> findColumnsByTable(int tableid) {
-        List<Column> results = new ArrayList<Column>();
-        try(Connection conn = super.getConnection()){
-            Statement pstmt = conn.createStatement();
-            ResultSet resultSet = pstmt.executeQuery(
-                    "SELECT ID,NAME,TYPE FROM TARGETCOLUMN WHERE TABLE_ID = '"+tableid+"';"
-            );
-            while (resultSet.next()){
-                //int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String type =resultSet.getString("type");
-                Column newColumn = new Column(name,type);
-                results.add(newColumn);
-            }
-        }catch (SQLException sqle){
-            sqle.printStackTrace();;
-        }
-        return results;
-    }
+
 
     @Override
     public List<Column> findAll() {
@@ -71,6 +52,8 @@ public class ColumnDAOImpl extends pgToolDao implements ColumnDAO {
         return column;
     }
 
+    //Aanmaken nieuwe Column die nieuwe ID teruggeeft
+
     @Override
     public int create(Column column, int tableid) throws SQLException {
         int x = 0;
@@ -91,23 +74,5 @@ public class ColumnDAOImpl extends pgToolDao implements ColumnDAO {
         }
         return x;
     }
-    //    conn = super.getConnection();
-//    int x = 0;
-//    Connection conn = super.getConnection();
-//        try {
-//        AttributeRange atrng = rule;
-//        atrng.toString();
-//        String range = "insert into BUSINESSRULETYPE(ruletype,operator,minval,maxval)" +
-//                "Values( '" + atrng.getType() + "','" + atrng.getOperator() + "'," +atrng.getMinvalue() + "," + atrng.getMaxvalue() + ") RETURNING id;";
-//        Statement stmt = conn.createStatement();
-//        ResultSet rs = stmt.executeQuery(range);
-//        while (rs.next()) {
-//            x += rs.getInt("id");
-//        }
-//        return x;
-//    } catch (SQLException throwables) {
-//        throwables.printStackTrace();
-//    }
-//        return x;
-//}
+
 }

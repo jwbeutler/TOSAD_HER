@@ -1,12 +1,9 @@
 package brgenerator.generate;
 
-import brgenerator.model.AttributeRange;
-import brgenerator.model.BusinessRule;
-
 public class AttributeRangeGenerator extends Trigger {
 
-        private String template =
-                "CREATE OR REPLACE FUNCTION %s_function() " +   "RETURNS TRIGGER AS " + "$BODY$ "
+    //PLSQL CODE IN FORMAT
+    private String plsql = "CREATE OR REPLACE FUNCTION %s_function() " +   "RETURNS TRIGGER AS " + "$BODY$ "
                         +   "BEGIN "
                         +       "IF (NEW.%s %s %s AND %s) THEN "
                         +           "RETURN NEW; "
@@ -17,12 +14,17 @@ public class AttributeRangeGenerator extends Trigger {
                         + "$BODY$ "
                         + "LANGUAGE plpgsql SECURITY INVOKER; ";
 
-        public String generateRule (String brname,String columnname, String tablename, String operator, int minval, int maxval) {
-            String message = "";
-            template = String.format(template, brname, columnname, operator, minval, maxval, message);
-            String Trigger = generateGenericTrigger(brname,columnname,tablename,brname);
-            template += Trigger;
+    //INVULLEN PLSQL MET VARIABELEN
 
-            return template;
+    public String generateRule (String brname,String columnname, String tablename, String operator, int minval, int maxval) {
+            String message = "";
+            plsql = String.format(plsql, brname, columnname, operator, minval, maxval, message);
+
+        //OPHALEN TRIGGER EN TOEVOEGEN AAN PLSQL
+
+        String Trigger = generateGenericTrigger(brname,columnname,tablename,brname);
+            plsql += Trigger;
+
+            return plsql;
         }
     }

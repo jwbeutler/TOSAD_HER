@@ -13,7 +13,6 @@ public class AttributeRangeService {
     public AttributeRange createAR(String name, String operator, int minVal, int maxVal) throws SQLException {
         AttributeRange newAr = new AttributeRange(name,operator,minVal,maxVal);
         int id = attributeRangeDAO.create(newAr);
-        //System.out.println(id);
         newAr.setId(id);
         return newAr;
     }

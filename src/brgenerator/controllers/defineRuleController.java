@@ -126,8 +126,7 @@ public class defineRuleController implements Initializable {
         //FINALIZE CREATING BUSINESS RULE
         int columnid = c.getId();
         int ruleid = ac.getId();
-        //System.out.println(columnid);
-        //System.out.println(ruleid);
+
         businessRuleService.createACBusinessRule(ruletext, columnid, ruleid);
     }
 
@@ -138,10 +137,6 @@ public class defineRuleController implements Initializable {
             } else if (ruletext == "AttributeCompare") {
                 defineAC();
             }
-
-
-
-        //CREATING NEW ATTRIBUTECOMPARE RULE FUNCTIE!! DIE ATTRIBUTECOMPARE TERUGGEEFT
 
 
 

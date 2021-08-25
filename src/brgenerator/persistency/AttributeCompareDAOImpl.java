@@ -12,6 +12,8 @@ import java.util.List;
 
 public class AttributeCompareDAOImpl extends pgToolDao implements AttributeCompareDAO {
 
+
+    //Aanmaken nieuwe Rule die nieuwe ID teruggeeft
     @Override
     public int create(AttributeCompare attributeCompare) throws SQLException {
         int x = 0;

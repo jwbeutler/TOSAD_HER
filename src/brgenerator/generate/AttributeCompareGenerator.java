@@ -2,7 +2,10 @@ package brgenerator.generate;
 
 public class AttributeCompareGenerator extends Trigger {
 
-    private String template =
+
+    //PLSQL CODE IN FORMAT
+
+    private String plsql =
             "CREATE OR REPLACE FUNCTION %s_function() "
                     +   "RETURNS TRIGGER AS "
                     + "$BODY$ "
@@ -17,17 +20,21 @@ public class AttributeCompareGenerator extends Trigger {
                     + "$BODY$ "
                     + "LANGUAGE plpgsql SECURITY INVOKER; ";
 
+    //INVULLEN PLSQL MET VARIABELEN
+
     public String generateRule (String brname,String columnname, String tablename, String operator, int litval) {
         String message = "";
-        template = String.format(template,
+        plsql = String.format(plsql,
                 brname,
                 columnname,
                 operator,
                 litval,message);
 
-        String Trigger = generateGenericTrigger(brname,columnname,tablename,brname);
-        template += Trigger;
+        //OPHALEN TRIGGER EN TOEVOEGEN AAN PLSQL
 
-        return template;
+        String Trigger = generateGenericTrigger(brname,columnname,tablename,brname);
+        plsql += Trigger;
+
+        return plsql;
     }
 }

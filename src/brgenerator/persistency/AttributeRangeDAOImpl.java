@@ -12,28 +12,7 @@ public class AttributeRangeDAOImpl extends pgToolDao implements AttributeRangeDA
     private Connection conn;
 
 
-    //    @Override
-//    public int create(AttributeRange attributeRange) {
-//        int x = 0;
-//        try (Connection connection = super.getConnection()) {
-//            String query = "INSERT INTO BUSINESSRULETYPE(ruletype,operator,minval,maxval)values(?,?,?,?)";
-//            PreparedStatement pstmt = connection.prepareStatement(query);
-//            //pstmt.setInt(1, attributeRange.getId());
-//            pstmt.setString(1, attributeRange.getType());
-//            pstmt.setString(2, attributeRange.getOperator());
-//            pstmt.setInt(3, attributeRange.getMinvalue());
-//            pstmt.setInt(4, attributeRange.getMaxvalue());
-//            ResultSet rs = pstmt.executeQuery(query);
-//            while(rs.next()){
-//                x += rs.getInt("id");
-//            }
-//            return x;
-//
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return x;
-//    }
+    //Aanmaken nieuwe Rule die nieuwe ID teruggeeft
     @Override
     public int create(AttributeRange rule) throws SQLException   {
         conn = super.getConnection();

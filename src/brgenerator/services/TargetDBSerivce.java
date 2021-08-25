@@ -17,9 +17,6 @@ public class TargetDBSerivce {
     public List<Column> findColumnsByTable(String tableName){
         return targetDatabaseDAO.findColumnsByTable(tableName);
     }
-    public Table findTableByName(String tableName){
-        return targetDatabaseDAO.findTableByName(tableName);
-    }
     public boolean executeRule(String script) throws SQLException {
         return targetDatabaseDAO.executeRuleScript(script);
     }

@@ -89,7 +89,7 @@
             <Font size="12.0" />
          </font>
       </Text>
-      <Button fx:id="generateRule" layoutX="337.0" layoutY="435.0" mnemonicParsing="false" onAction="#generateRule" text="Generate Rule" />
+      <Button fx:id="generateRule" layoutX="417.0" layoutY="435.0" mnemonicParsing="false" onAction="#generateRule" text="Generate Rule" />
       <Separator layoutX="221.0" layoutY="155.0" prefHeight="9.0" prefWidth="327.0" />
       <Separator layoutX="228.0" layoutY="288.0" prefHeight="9.0" prefWidth="327.0" />
       <Text layoutX="330.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Businesss Rule" />
@@ -103,5 +103,6 @@
             <Font size="12.0" />
          </font>
       </Text>
+      <Button fx:id="fillData" layoutX="242.0" layoutY="435.0" mnemonicParsing="false" onAction="#fillData" text="Fill Data" />
    </children>
 </AnchorPane>

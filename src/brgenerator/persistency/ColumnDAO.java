@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ColumnDAO {
-    public List<Column> findColumnsByTable(int tableid);
     public List<Column> findAll();
     public Column findById(int id);
     public int create(Column column, int tableid) throws SQLException;

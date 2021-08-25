@@ -17,7 +17,6 @@ public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
             PreparedStatement pstmt = con.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
-//                int id =rs.getInt("id");
                 String name = rs.getString("name");
                 BusinessRule newBusinessRule = new BusinessRule(name);
                 results.add(newBusinessRule);
@@ -28,6 +27,7 @@ public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
         return results;
     }
 
+    //Ophalen rules op basis van Foreign Keys
     @Override
     public List<BusinessRule> findStartRuleById(int brtypeid, int tcid) {
         List<BusinessRule> results = new ArrayList<BusinessRule>();
@@ -84,6 +84,7 @@ public class BusinessRuleDAOImpl extends pgToolDao implements BusinessRuleDAO{
         return results;
     }
 
+    //Aanmaken nieuwe Rule die nieuwe ID teruggeeft
     @Override
     public int create(BusinessRule businessRule,int columnid,int ruletypeid) throws SQLException {
         int x = 0;

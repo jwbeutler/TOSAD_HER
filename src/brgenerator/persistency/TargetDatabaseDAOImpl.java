@@ -10,6 +10,7 @@ import java.util.List;
 
 public class TargetDatabaseDAOImpl extends pgTargetDao implements TargetDatabaseDAO {
 
+    //Ophalen alle tabellen
     @Override
     public List<Table> findAll() {
         List<Table> results = new ArrayList<Table>();
@@ -30,6 +31,7 @@ public class TargetDatabaseDAOImpl extends pgTargetDao implements TargetDatabase
 
     }
 
+    //Specifieke tabel opvragen
     @Override
     public Table findTableByName(String name) {
         Table table = null;
@@ -50,6 +52,7 @@ public class TargetDatabaseDAOImpl extends pgTargetDao implements TargetDatabase
         return table;
     }
 
+    //Specifieke kolommen bij tabel vinden
     @Override
     public List<Column> findColumnsByTable(String tablename) {
         List<Column> columns = new ArrayList<Column>();
@@ -71,6 +74,8 @@ public class TargetDatabaseDAOImpl extends pgTargetDao implements TargetDatabase
         return columns;
 
     }
+
+    //Uitvoeren PLSQL
     public boolean executeRuleScript(String script) throws SQLException {
         Connection conn = super.getConnection();
         try{
@@ -83,10 +88,5 @@ public class TargetDatabaseDAOImpl extends pgTargetDao implements TargetDatabase
         return false;
     }
 
-
-    @Override
-    public Column findColumnByName(String name) {
-        return null;
-    }
 
 }

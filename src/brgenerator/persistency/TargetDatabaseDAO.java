@@ -10,6 +10,5 @@ public interface TargetDatabaseDAO {
     public List<Table> findAll();
     public Table findTableByName(String name);
     public List<Column> findColumnsByTable(String tablename);
-    public Column findColumnByName(String name);
     public boolean executeRuleScript(String script) throws SQLException;
 }

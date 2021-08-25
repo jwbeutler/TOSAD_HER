@@ -62,22 +62,6 @@ public class BusinessRuleService {
     }
 
 
-
-    public List<BusinessRule> findStartRulesById(int ruletypeid, int columnid){
-        ColumnService columnService = ServiceProvider.getColumnService();
-        AttributeRangeService attributeRangeService = ServiceProvider.getAttributeRangeService();
-        for(Column c : columnService.findAll()){
-            if(c.getId() == columnid){
-                for(AttributeRange ar : attributeRangeService.findAll()){
-                    if(ar.getId() == ruletypeid){
-                        return businessRuleDAO.findStartRuleById(ruletypeid,columnid);
-                    }
-                    return null;
-                }
-            }
-        }
-        return null;
-    }
     public List<BusinessRule> findStartSchermRules(){
         List<BusinessRule>brStartSchermRules = businessRuleDAO.findStartSchermRules();
         for(BusinessRule br : brStartSchermRules){
